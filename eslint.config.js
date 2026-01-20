@@ -23,7 +23,9 @@ export default defineConfig([
             },
         },
         rules: {
-            "react/prop-types": 0, "react-hooks/set-state-in-effect": 0
+            'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+            "react/prop-types": 0,
+            "react-hooks/set-state-in-effect": 0,
         },
     },
 ])
