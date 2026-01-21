@@ -48,8 +48,6 @@ function NatureParkDetail() {
                     </div>
 
                     <section className=" p-6 md:p-5 flex flex-col items-center">
-                        {/*<div*/}
-                        {/*    className="basis-l w-64 bg-green-800 text-pink-200 border-2 p-4 border-pink-200 rounded-md">*/}
                         <h2 className="tex-3xl font-extrabold text-center pb-2">{naturePark.name}</h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

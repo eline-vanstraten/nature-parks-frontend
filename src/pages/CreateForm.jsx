@@ -130,7 +130,7 @@ function CreateForm() {
                 />
             </div>
             <div className="flex flex-col">
-                <label htmlFor="imageUrl">Image:</label>
+                <label htmlFor="imageUrl">Image Url:</label>
                 <input
                     type="text"
                     id="imageUrl"
@@ -141,7 +141,9 @@ function CreateForm() {
                 />
             </div>
 
-            <button type="submit" className="rounded bg-green-700 text-white p-2">Verzenden</button>
+            <button type="submit"
+                    className="italic text-center hover:text-emerald-900 hover:bg-amber-100 rounded-2xl bg-emerald-700 text-amber-50 mb-2 p-2 pl-10 pr-10">Add
+            </button>
         </form>
     );
 }

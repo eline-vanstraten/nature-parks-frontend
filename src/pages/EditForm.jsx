@@ -174,7 +174,7 @@ function EditForm() {
                 />
             </div>
             <button type="submit"
-                    className="italic text-center hover:text-emerald-900 hover:bg-amber-100 rounded-2xl bg-emerald-700 text-amber-50 mb-2 p-2 pl-10 pr-10">Opslaan
+                    className="italic text-center hover:text-emerald-900 hover:bg-amber-100 rounded-2xl bg-emerald-700 text-amber-50 mb-2 p-2 pl-10 pr-10">Save
             </button>
         </form>
     );
