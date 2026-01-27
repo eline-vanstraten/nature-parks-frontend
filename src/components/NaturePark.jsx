@@ -1,6 +1,10 @@
 import {Link} from "react-router";
+import {useState} from "react";
 
 function NaturePark({park, parkDeleted}) {
+
+    //add park to favorite
+    const [favorite, setFavorite] = useState(park.isFavorite ?? false);
 
     const deletePark = async () => {
         try {
@@ -11,13 +15,41 @@ function NaturePark({park, parkDeleted}) {
                 }
             })
 
-            console.log(result)
+            console.log(result);
 
             if (result.status === 204) {
-                parkDeleted()
+                parkDeleted();
             }
         } catch (e) {
-            console.log(e)
+            console.log(e);
+        }
+    }
+
+    //add park to favorite
+    const favoritePark = async () => {
+        try {
+
+            const result = await fetch(`http://145.24.237.22:8001/parks/${park.id}`, {
+                method: "PATCH",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    isFavorite: !favorite
+                })
+            });
+
+            if (!result.ok) {
+                throw new Error("Favorite updaten mislukt")
+            }
+
+            const updatedPark = await result.json();
+
+            setFavorite(updatedPark.isFavorite);
+
+        } catch (e) {
+            console.log(e);
         }
     }
 
@@ -35,11 +67,19 @@ function NaturePark({park, parkDeleted}) {
 
                     <div className="flex-grow"/>
 
+                    <button onClick={favoritePark} className={`mb-2 rounded-2xl ${
+                        favorite
+                            ? "bg-yellow-400 text-black"
+                            : "bg-gray-300 text-gray-700"
+                    }`}>
+                        {favorite ? "⭐ Favorite" : "☆ Favorite"}
+                    </button>
+
                     <Link to={`/natureParks/${park.id}`}
                           className="italic text-center hover:text-amber-50 hover:bg-emerald-700 rounded-2xl bg-amber-50 text-emerald-900 mb-2">Read
                         more</Link>
                     <button onClick={deletePark}
-                            className="bg-red-700 text-amber-50 hover:text-amber-50 hover:bg-red-800 rounded-2xl ">Delete
+                            className="italic bg-red-700 text-amber-50 hover:text-amber-50 hover:bg-red-800 rounded-2xl ">Delete
                     </button>
 
                 </div>

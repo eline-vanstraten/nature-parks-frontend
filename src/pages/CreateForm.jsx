@@ -32,7 +32,8 @@ function CreateForm() {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
-                    Accept: "application/json"
+                    Accept: "application/json",
+                    
                 },
                 //zet de js data om naar json om te sturen naar de server
                 body: JSON.stringify(formData)
