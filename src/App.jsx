@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouterProvider} from "react-router";
+import {createBrowserRouter, Link, RouterProvider} from "react-router";
 import './index.css'
 import Layout from "./layout/Layout.jsx";
 import Home from "./pages/Home.jsx";
@@ -7,6 +7,7 @@ import NatureParks from "./pages/NatureParks.jsx";
 import NatureParkDetail from "./pages/NatureParkDetail.jsx";
 import CreateForm from "./pages/CreateForm.jsx";
 import EditForm from "./pages/EditForm.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: '/edit/:id',
                 element: <EditForm/>,
+            },
+            {
+                path: '*',
+                element: <NotFound/>,
             }
 
         ]
@@ -44,5 +49,6 @@ function App() {
 
 
 }
+
 
 export default App

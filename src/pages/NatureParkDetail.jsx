@@ -7,6 +7,10 @@ function NatureParkDetail() {
     const [naturePark, setNaturePark] = useState(null)
     const params = useParams();
 
+    //404 afhandelen
+    const [notFound, setNotFound] = useState(false);
+    const [loading, setLoading] = useState(true);
+
     const loadPark = async () => {
         try {
             const result = await fetch(`http://145.24.237.22:8001/parks/${params.id}`, {
@@ -15,16 +19,29 @@ function NatureParkDetail() {
                 }
             });
 
-            const data = await result.json()
-            console.log(data)
-
-            if (!data.error) {
-                setNaturePark(data);
+            //404 afhandelen
+            if (result.status === 404) {
+                setNotFound(true);
+                return;
             }
+
+            if (!result.ok) {
+                throw new Error("Server error");
+            }
+
+            const data = await result.json()
+            // console.log(data)
+
+            // if (!data.error) {
+            setNaturePark(data);
+            // }
 
 
         } catch (e) {
             console.log(e)
+            setNotFound(true);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -34,8 +51,21 @@ function NatureParkDetail() {
     }, []);
 
 
-    //
-    //
+    if (loading) {
+        return <div>Nature Park is loading...</div>;
+    }
+
+    if (notFound) {
+        return (
+            <div className="not-found p-8 text-center">
+                <h1 className="text-3xl font-bold mb-4">404 - Nature Park Not Found</h1>
+                <p className="mb-6">This park does not exist or has been removed</p>
+                <Link to="/natureParks" className="underline text-emerald-700 hover:text-emerald-900">Go back to parks
+                    overview</Link>
+            </div>
+        )
+    }
+
     return (
         <>
             {naturePark ? (
@@ -82,7 +112,7 @@ function NatureParkDetail() {
                     </section>
                 </article>
             ) : (
-                <div>Nature Park is loading</div>
+                <div>Nature Park is loading...</div>
             )}
         </>
 
